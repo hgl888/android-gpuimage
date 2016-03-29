@@ -1,11 +1,8 @@
 package com.gpuimg;
 
-import static com.gpuimg.ShaderUtil.createProgram;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.util.Date;
 
 import android.opengl.GLES20;
 import android.util.Log;
@@ -87,7 +84,7 @@ public class TextureRect {
 		// 加载顶点着色器的脚本内容
 		mVertexShader = ShaderUtil.loadFromAssetsFile("vertex.sh", mv.getResources());
 		// 加载片元着色器的脚本内容
-		mFragmentShader = ShaderUtil.loadFromAssetsFile("frag.sh", mv.getResources());
+		mFragmentShader = ShaderUtil.loadFromAssetsFile("frag_halfcircle.sh", mv.getResources());
 		// 基于顶点着色器与片元着色器创建程序
 		mProgram = ShaderUtil.createProgram(mVertexShader, mFragmentShader);
 		// 获取程序中顶点位置属性引用id
@@ -104,7 +101,7 @@ public class TextureRect {
 		mCount++;
 		if( mCount > 10.1 ){
 			long offtime  = System.currentTimeMillis() - mlCurentTime;
-			float fps = 1000 / ((float)offtime / (float)(mCount));
+			float fps = 1000 / ((float)offtime / (float)(mCount+1));
 			Log.e("TextrueRect", "FPS=" + fps );
 			mCount = 0;
 			mlCurentTime = System.currentTimeMillis();
