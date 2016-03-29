@@ -27,6 +27,11 @@ public class TextureRect {
 	float yAngle = 0;// 绕y轴旋转的角度
 	float zAngle = 0;// 绕z轴旋转的角度
 
+	int mCount = 0;
+
+	long mlStartTime = System.currentTimeMillis();
+	long mlCurentTime = System.currentTimeMillis();
+
 	public TextureRect(MySurfaceView mv) {
 		// 初始化顶点坐标与着色数据
 		initVertexData();
@@ -96,17 +101,29 @@ public class TextureRect {
 
 	static float time = (float) 0.0;
 	public void drawSelf(int texId) {
-		if( time > 10.0 )
-			time = (float) 0.0;
-		time += 0.007;
+		mCount++;
+		if( mCount > 10.1 ){
+			long offtime  = System.currentTimeMillis() - mlCurentTime;
+			float fps = 1000 / ((float)offtime / (float)(mCount));
+			Log.e("TextrueRect", "FPS=" + fps );
+			mCount = 0;
+			mlCurentTime = System.currentTimeMillis();
+		}
+		if( time > 3.1415926 )
+			time = (float) -3.1415926;
+		time += 0.016;
+
 		// 制定使用某套shader程序
 		GLES20.glUseProgram(mProgram);
 
 		// 将最终变换矩阵传入shader程序
 		GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, MatrixState.getFinalMatrix(), 0);
 		//Date currentdate = new Date();//当前时间
-		//float time = currentdate.getTime() % 1000;
-		//Log.e("TextrueRect", "time=" + time );
+
+		float currentTimeMillis = (float)(((System.currentTimeMillis() % 10000) / 1000.0));
+
+		float time1 = (float)currentTimeMillis;
+		Log.e("TextrueRect", "time=" + time );
 		GLES20.glUniform1f(maGlobalTime, time);
 		
 		// 为画笔指定顶点位置数据

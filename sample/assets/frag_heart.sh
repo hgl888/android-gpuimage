@@ -1,7 +1,7 @@
 precision mediump float;
-varying vec2 vTextureCoord; //½ÓÊÕ´Ó¶¥µã×ÅÉ«Æ÷¹ıÀ´µÄ²ÎÊı
+varying vec2 vTextureCoord; //æ¥æ”¶ä»é¡¶ç‚¹ç€è‰²å™¨è¿‡æ¥çš„å‚æ•°
 varying vec2 vPosition;
-uniform sampler2D sTexture1;//ÎÆÀíÄÚÈİÊı¾İ
+uniform sampler2D sTexture1;//çº¹ç†å†…å®¹æ•°æ®
 uniform float sGlobalTime;
 
 float smoothstepmy( float x, float y, float a )
@@ -27,7 +27,7 @@ void main()
 		//vec4 layer2 = vec4( 1.0, 1.0, 0.5, 1.0 - t );
 		//gl_FragColor = mix( layer1, layer2, layer2.a );
 
-   //¸ø´ËÆ¬Ôª´ÓÎÆÀíÖĞ²ÉÑù³öÑÕÉ«Öµ            
+   //ç»™æ­¤ç‰‡å…ƒä»çº¹ç†ä¸­é‡‡æ ·å‡ºé¢œè‰²å€¼            
    //gl_FragColor = texture2D(sTexture1, vTextureCoord);
    
    	vec2 p = vPosition;
